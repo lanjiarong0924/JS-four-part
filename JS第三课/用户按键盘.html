@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+            body{
+                text-align:center;
+                font:30px/1.5 \5fae\8f6f\96c5\9ed1, arial;	
+            }
+           
+            span{color:#999;}
+            p{
+                display: none;
+            }
+            </style>
+            
+                
+            
+            
+</head>
+<body>
+    <!-- <span>请随机输入键盘按钮</span> -->
+    <p>数字显示</p>
+    <button>点击开始</button>
+</body>
+
+<script>
+    var btn=document.querySelector('button');
+var oP = document.getElementsByTagName("p")[0];	
+
+    btn.onclick=function(){
+        oP.style.display='block'
+        alert('请输入键盘按钮！')
+        document.onkeydown = function (event)
+	{
+        
+		var event =  window.event;
+		oP.innerHTML = event.keyCode;     
+    }
+    
+    }
+
+      
+	
+
+</script>
+</html>

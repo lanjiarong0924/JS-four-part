@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>照片库</title>
+    <style>
+        h1 {
+            font-family: helvetica, arial, sans-serif;
+            text-align: center;
+        }
+
+        body {
+            width: 640px;
+            margin: 0 auto;
+        }
+
+        .full-img {
+            position: relative;
+            display: block;
+            width: 640px;
+            height: 500px;
+        }
+
+        .full-img img {
+            width: 100%;
+            height: 100%;
+        }
+
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 640px;
+            height: 500px;
+            background-color: rgba(0, 0, 0, 0);
+            
+        }
+
+        button {
+            border: 0;
+            
+            background: rgba(150, 150, 150, 0.6);
+            text-shadow: 1px 1px 1px white;
+            border: 1px solid #999;
+            position: absolute;
+            cursor: pointer;
+            top: 2px;
+            left: 2px;
+        }
+
+        .thumb-bar img {
+            display: block;
+            width: 20%;
+            height: 130px;
+            float: left;
+            cursor: pointer;
+        }
+
+        /* .liang {
+           
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 640px;
+            height: 520px;
+        } */
+        .red{
+            position: absolute;
+            top: 33px;
+        }
+         
+    </style>
+</head>
+
+<body>
+    <h1>照片库</h1>
+
+    <div class="full-img">
+        <img class="displayed-img" src="./img/pic1.jpg">
+        <div class="overlay"></div>
+        <button class="dark">变暗</button>
+        <button id="button1" class="red">变红</button>
+    </div>
+
+    <div class="thumb-bar">
+
+
+    </div>
+
+</body>
+<script>
+
+    var Image = document.querySelector('.displayed-img');
+    var thumbBar = document.querySelector('.thumb-bar');
+    var btn1=document.querySelector('#button1');
+    var btn = document.querySelector('button');
+    var overlay = document.querySelector('.overlay');
+
+    /* 遍历图片并添加至缩略图区 */
+
+    for (var i = 1; i <= 5; i++) {
+        var newImage = document.createElement('img');
+        newImage.setAttribute('src', 'img/pic' + i + '.jpg');
+        thumbBar.appendChild(newImage);
+        newImage.onclick = dianji;
+        // dianji.onclick=newImage();
+    }
+    /* dianji方法 */
+    function dianji(e) {
+        var xiaoImg = e.target.getAttribute('src');
+
+
+        function displayImage(xiaoImg) {
+            console.log(Image)
+            Image.setAttribute('src', xiaoImg);
+
+        }
+        /* 调用这个函数*/
+        displayImage(xiaoImg);
+    }
+
+
+     btn.onclick = function() {
+   var btnClass = btn.getAttribute('class'); 
+   if(btnClass === 'dark') {
+     btn.setAttribute('class','light');
+     btn.textContent = '变亮';
+     overlay.style.backgroundColor = 'rgba(0,0,0,0.5)';
+
+   }else{
+       btn.setAttribute('class','dark');
+       btn.textContent = '变暗';
+       overlay.style.backgroundColor = 'rgba(0,0,0,0)';
+   }
+}
+
+   
+    
+
+</script>

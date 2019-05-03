@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>放大镜</title>
+    <style>
+    *{
+        margin: 0;
+        padding: 0;
+    }
+    .box{
+        width: 900px;
+        height: 450px;
+        /* border: 1px solid red; */
+        margin: 50px auto;
+    }
+    li{
+        list-style: none;
+    }
+    .top
+    {
+        height: 300px;
+    }
+    .smallimg{
+        position: relative;
+        height: 300px;
+    }
+    .smallimg img{
+        height: 300px;
+    }
+    .smallimg,#bigimg{
+        width: 400px;
+        height: 300px;
+        /* border: 1px solid green; */
+        float: left;
+    }
+    #bigimg{
+        overflow: hidden; /* 超出容器部分后的处理方式 隐藏起来 */
+        margin-left: 50px;
+        position: relative;
+        display: none;
+    }
+    #bigimg img{
+        position: absolute;
+        left: 0;
+        top: 0;
+    }
+    .smallimg img{
+        position: absolute;
+    }
+    .smallimg #fk{
+        width: 100px;
+        height: 100px;
+        background-color: rgba(255, 0, 0, 0.3);
+        position: absolute;
+        left: 0;
+        top: 0;
+        cursor: pointer;
+    }
+    .bottom{
+        width: 400px;
+        height: 60px;
+        position: absolute;
+        /* border: 1px solid blue; */
+    }
+    .bottom li{
+        width: 62px;
+        height: 60px;
+        float: left;
+        border: 1px solid black;
+        margin: 1px;
+    }
+    .bottom li img{
+        width: 100%;
+        height: 100%;
+    }
+
+    </style>
+</head>
+<body>
+     <div class="box">
+         <div class="top">
+             <div class="smallimg">
+                 <img src="./img/1.jpg" width="100%" alt="">
+                 <div id="fk"></div>
+             </div>
+             <div id="bigimg">
+                 <img class="" src="./img/1.jpg" alt="">
+             </div>
+         </div>
+         <div class="bottom">
+            <ul>
+                <li class="miniimg"><img src="./img/1.jpg" alt=""></li>
+                <li class="miniimg"><img src="./img/2.jpg" alt=""></li>
+                <li class="miniimg"><img src="./img/3.jpg" alt=""></li>
+                <li class="miniimg"><img src="./img/4.jpg"alt=""></li>
+                <li class="miniimg"><img src="./img/5.jpg"alt=""></li>
+                <li class="miniimg"><img src="./img/6.jpg"alt=""></li>
+            </ul>
+
+         </div>
+     </div>
+</body>
+<script>
+var fk=document.getElementById('fk');
+//得到小图容器 数组的访问通过下标开始。从0开始
+var smallimg=document.getElementsByClassName('smallimg')[0];
+var bigimg=document.querySelector('#bigimg')
+var bigImgObj = document.querySelector("#bigimg img");
+    smallimg.onmousemove=function(e){
+        fk.style.display='block';
+        bigimg.style.display='block'
+        var mouseX=e.clientX;
+        var mouseY=e.clientY;
+        // this.offsetLeft容器距离页面左边的距离
+        var offsetX=this.offsetLeft;//代表smallimg距离左边的距离
+        // console.log(mouseX+" "+offsetX);
+        var offsetY=this.offsetTop;
+        var x=mouseX-offsetX-fk.offsetWidth/2;
+        //三元表达式 条件?条件满足时执行：条件不满足时执行
+        x=x<0?0:x;
+        x=x>smallimg.offsetWidth-fk.offsetWidth?smallimg.offsetWidth-fk.offsetWidth:x
+        var y=mouseY-offsetY-fk.offsetHeight/2;
+        y=y<0?0:y;
+        y=y>smallimg.offsetHeight-fk.offsetHeight?smallimg.offsetHeight-fk.offsetHeight:y
+        fk.style.left=x+'px'
+        fk.style.top=y+'px'
+        
+
+        var biliX=(bigImgObj.clientWidth-bigimg.offsetWidth)/(smallimg.clientWidth-fk.offsetWidth)
+        var biliY=(bigImgObj.clientHeight-bigimg.offsetHeight)/(smallimg.clientHeight-fk.offsetHeight)
+
+        bigImgObj.style.left=-biliX*x+'px';
+
+        bigImgObj.style.top=-biliY*y+'px';
+
+    }
+    smallimg.onmouseout=function(){
+        fk.style.display='none';
+        bigimg.style.display='none';
+    }
+   
+    var miniimg=document.getElementsByClassName('miniimg');
+    for(var i=0;i<miniimg.length;i++){
+        // console.log(i)
+        miniimg[i].onmousemove=function(){
+            // console.log(miniimg)
+            // console.log(i)
+        bigImgObj.src=this.childNodes[0].src;
+        // console.log(smallimg.childNodes[1])
+        smallimg.childNodes[1].src=this.childNodes[0].src
+    }
+}
+
+
+</script>
+</html>

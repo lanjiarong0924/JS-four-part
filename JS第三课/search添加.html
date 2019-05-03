@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+  
+
+        <input type="text">
+        <button>Search</button>
+
+        <ul>
+
+        </ul>
+
+    </div>
+</body>
+    <script>
+    var Btn=document.querySelector('button');
+    var input=document.querySelector('input');
+    var ul=document.querySelector('ul');
+    var arr=[];
+    ul.innerHTML='';
+    
+    Btn.onclick=function(){
+        arr.unshift(input.value)
+        ul.innerHTML='';
+        for(var i=0;i<arr.length;i++){
+            var li=document.createElement('li');
+            li.textContent=arr[i];
+            ul.appendChild(li)
+        }
+
+        input.value='';
+        input.focus();
+        if(arr.length>4){
+            arr.pop();
+        }
+    }
+
+    </script>
+</html>

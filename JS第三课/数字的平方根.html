@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        input {
+          font-size: 2em;
+          margin: 10px 1px 0;
+        }
+      </style>
+
+
+</head>
+<body>
+    <!-- squared平方 -->
+    <!-- cubed 立方 -->
+     <input class="numberInput" type="text" onchange="myFunction()">
+        <p></p>
+
+</body>
+
+    <script>
+    var input1=document.querySelector('.numberInput');
+    var p1=document.querySelector('p');
+    function squared(num){
+        return num*num;
+    }
+    function cubed(num){
+        return num*num*num;
+    }
+    function myFunction(){
+        var num=input1.value;
+        if(isNaN(num)){
+            p1.textContent='输入有误！请输入数字!';
+        }else{
+            p1.textContent=num+'的平方是'+squared(num)+'！！！'+  num + ' 的立方是 ' + cubed(num) + '！！！ ' 
+
+        }
+    }
+
+    </script>
+
+</html>

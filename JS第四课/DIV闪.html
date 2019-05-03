@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>点击我就闪</title>
+</head>
+<style>
+    #box{position:absolute;top:50%;left:50%;color:#fff;width:200px;height:200px;background:rgb(138, 76, 76);cursor:pointer;letter-spacing:5px;text-align:center;font:12px/200px Arial;margin:-100px 0 0 -100px;}
+
+</style>
+<body>
+    <div id="box">点击我就闪</div>
+
+</body>
+
+<script>
+        var box1=document.querySelector('#box');
+        var timer=null
+        box1.onclick=function(){
+            var i=0;
+            clearInterval(timer);
+            var timer=setInterval(function(){
+                box1.style.display=i++%2? "none":"block";
+                if(i>10){
+                clearInterval(timer);
+            }
+            },60)
+          
+        }
+     
+      
+</script>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>拉伸案列</title>
+	<style>
+		#div1 {
+			width: 130px;
+			height: 130px;
+			background: blue;
+			position: absolute;
+			left: 100px;
+			top: 200px;
+		}
+	</style>
+</head>
+
+<body>
+	<div id="div1"></div>
+</body>
+
+
+
+    <script>
+
+var div1 = document.getElementById("div1")
+div1.onmousedown=function(e){
+    var baceX=e.clientX;
+    var baceY=e.clientY;
+    var baceWight=div1.offsetWidth;
+    var baceHight=div1.offsetHeight;
+    var baceTop=div1.offsetTop;
+    var baceLeft=div1.offsetLeft;
+   
+    // console.log(e.clientX)
+    // console.log(baceWight)
+    // console.log(baceHight)
+    if(div1.offsetLeft+baceWight-baceX<=35){
+        var isR=true;
+    }else{
+        var isR=false;
+    }
+    if(div1.offsetTop+baceHight-baceY<=35){
+        var isB=true;
+    }else{
+        var isB=false;
+    }
+
+    if(e.clientY-div1.offsetTop<=35){
+        var isT=true
+    }else{
+        var isT=false
+    }
+
+    if(e.clientX-div1.offsetLeft<=35){
+        var isL=true;
+    }else{
+        var isL=false
+    }
+
+ 
+    
+   
+    document.onmousemove=function(e){
+        if(isR) div1.style.width=e.clientX-baceX+baceWight+'px';
+        if(isB) div1.style.height=e.clientY-baceY+baceHight+'px';
+        if(isT) div1.style.top=e.clientY-baceY+baceTop+'px';
+        if(isL) div1.style.left=e.clientX-baceX+baceLeft+'px';
+    }
+    document.onmouseup=function(){
+        document.onmousemove=null;
+    }
+
+}
+
+
+
+
+</script>
+
+</html>

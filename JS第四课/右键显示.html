@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style type="text/css">
+        body,ul,li{margin:0;padding:0;
+        background: blueviolet}
+        body{font:12px/24px arial;}
+        #menu{position:absolute;top:-9999px;left:-9999px;width:100px;border-radius:3px;list-style-type:none;border:1px solid #8f8f8f;padding:2px;background:#fff;}
+        #menu li{position:relative;height:24px;padding-left:24px;background:#eaead7;vertical-align:top;}
+        #menu li a{display:block;color:#333;background:#fff;padding-left:5px;text-decoration:none;}
+        #menu li.active{background:#999;}
+        #menu li.active a{color:#fff;background:#8f8f8f;}
+        #menu li em{position:absolute;top:0;left:0;width:24px;height:24px;background:url(img/ico.png) no-repeat;}
+        #menu li em.cur{background-position:0 0;}
+        #menu li em.copy{background-position:0 -24px;}
+        #menu li em.paste{background-position:0 -48px;}
+        </style>
+      
+        </head>
+        <body>
+        <center>自定义右键菜单，请在页面点击右键查看效果。</center>
+        <ul id="menu">
+            <li><em class="cut"></em><a href="javascript:;">剪切</a></li>
+            <li><em class="copy"></em><a href="javascript:;">复制</a></li>
+            <li><em class="paste"></em><a href="javascript:;">粘贴</a></li>
+        </ul>
+        </body>
+            <script>
+                var menu=document.getElementById('menu');
+                var aLi=document.getElementsByTagName('li');
+                menu.style.display='none';
+                for(var i=0;i<aLi.length;i++){
+                    aLi[i].onmouseover=function(){
+                        this.className='active'
+                    }
+                    aLi[i].onmouseout=function(){
+                        this.className=''
+                    }
+                }
+    	//自定义菜单
+	document.oncontextmenu = function (e)
+	{   
+        //兼容
+		var event = event || window.event;
+
+		
+		menu.style.display = "block";
+		menu.style.top = e.clientY + "px";
+		menu.style.left = e.clientX + "px";
+		return false;
+	};
+	//页面点击后自定义菜单消失
+	document.onclick = function ()
+	{
+		menu.style.display = "none"	
+       
+	}
+
+
+            </script>
+
+        </html>
+        

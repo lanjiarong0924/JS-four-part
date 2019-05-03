@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<style>
+    #outer{width:500px;margin:0 auto;padding:0;text-align:center;}
+    #div1{width:100px;height:100px;background:black;margin:10px auto;display:block;}
+    </style>
+    
+<body>
+    <div id="outer">
+        <input type="button" value="变宽" class="button1">
+        <input type="button" value="变高" class="button2" >
+        <input type="button" value="变红" class="button3">
+        <input type="button" value="隐藏" class="button4">
+        <input type="button" value="重置" class="button5">
+    </div>
+
+    <div id="div1"></div>
+
+
+    <script>
+    var outer=document.querySelector('#outer');
+    var div1=document.querySelector('#div1');
+    var button1=document.querySelector('.button1');
+    var button2=document.querySelector('.button2');
+    var button3=document.querySelector('.button3');
+    var button4=document.querySelector('.button4');
+    var button5=document.querySelector('.button5');
+
+    //   document.querySelector('.button1').onclick=function(){
+    //       document.querySelector('#div1').style.width='200px'
+    //   }  
+    button1.onclick=function(){
+        div1.style.width='200px';
+    }
+    button2.onclick=function(){
+        div1.style.height='200px';
+    }
+    button3.onclick=function(){
+        div1.style.background='red';
+    }
+    button4.onclick=function(){
+        div1.style.display='none';
+    }
+    button5.onclick=function(){
+        div1.style.cssText='';
+        div1.style.display='block';
+    }
+    </script>
+
+</body>
+</html>

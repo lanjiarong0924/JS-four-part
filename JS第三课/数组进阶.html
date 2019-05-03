@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        div{color:green;padding:10px 15px;margin:12px 0;background:#f0f0f0;border:1px dotted #333;font:12px/1.5 Courier New;word-wrap:break-word;}
+        </style>
+
+</head>
+
+<body>
+    <div>January(1),February(2),March(3),April(4),May(5),June(6),July(7),Aguest(8),September(9),October(10),November(11),December(12)</div>
+    <input type="button" value="删除January(1)" />
+    <input type="button" value="删除December(12)" />
+    <div>0,1,2,3,4,5,6,7,8,9</div>
+<input type="button" value="复制" />
+<input type="button" value="还原" />
+
+    
+</body>
+<script>
+  var aDiv = document.getElementsByTagName("div");
+	var aInput = document.getElementsByTagName("input");
+	var i = 0;
+	var bS1 = bS2 = true;
+	var aTmp = [];
+	
+	//删除/添加第一项
+	aInput[0].onclick = function ()
+	{
+		aTmp = getArray(aDiv[0].innerHTML);
+        //三元运算符
+		 bS1 ?
+		//删除第一项， shift()方法
+		(aTmp.shift(), this.value = this.value.replace("删除","添加"), bS1 = false) :
+		//添加第一项, unshift()方法
+		(aTmp.unshift("January(1)"), this.value = this.value.replace("添加","删除"), bS1 = true);
+        
+        //输出
+        //join()方法将数组中所有元素连接为一个字符串
+		aDiv[0].innerHTML = aTmp.join()
+       
+        
+	};
+    
+		//删除/添加最后一项
+        aInput[1].onclick = function ()
+	{
+		aTmp = getArray(aDiv[0].innerHTML);
+         //三元运算符
+		bS2 ?
+		//删除最后一项, pop()方法
+		(aTmp.pop(), this.value = this.value.replace("删除","添加"), bS2 = false) :
+		//添加最后一项, push()方法
+		(aTmp.push("December(12)"), this.value = this.value.replace("添加","删除"), bS2 = true);
+		//输出
+		aDiv[0].innerHTML = aTmp.join()
+	};
+        //复制, concat()方法
+
+    aInput[2].onclick=function(){
+        aTmp=getArray(aDiv[1].innerHTML);
+        aDiv[1].innerHTML=aTmp.concat(aTmp)
+
+    }
+    //还原,利用数组的 length 特点
+
+    aInput[3].onclick=function(){
+        aTmp=getArray(aDiv[1].innerHTML);
+        //设置数组长度
+        aTmp.length=10;
+        aDiv[1].innerHTML=aTmp.join();
+
+    }
+
+    function getArray(str)
+	{
+		aTmp.length = 0;
+		str = str.split(",");
+		for (var i in str)aTmp.push(str[i]);
+
+		return aTmp
+	}
+    
+
+
+
+
+</script>
+
+
+
+</html>

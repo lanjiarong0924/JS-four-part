@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>累积加</title>
+    <style>
+    body{text-align:center;}
+input{font:12px arial;cursor:pointer;padding:0 10px;}
+</style>
+</head>
+<body>
+<input type="button" value="0" />
+</body>
+    <script>
+        var aBtn=document.getElementsByTagName('input')[0]
+        var i=0;
+        aBtn.onmouseover=function(){
+            aBtn.value=++i;
+            alert(i)
+        }
+    
+    </script>
+
+
+</html>

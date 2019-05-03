@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>百度输入法</title>
+    <style>
+        body,
+        ul,
+        li,
+        button {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font: 12px/1.5 Tahoma;
+        }
+
+        ul {
+            list-style-type: none;
+        }
+
+        button {
+            cursor: pointer;
+        }
+
+        #outer {
+            width: 70px;
+            margin: 10px auto;
+        }
+
+        #ime {
+            margin-top: 0px;
+            background: #fff;
+            border: 1px solid #9a99ff;
+            display: none;
+        }
+
+        #ime li {
+            width: 100%;
+            line-height: 24px;
+            display: inline-block;
+            vertical-align: top;
+        }
+
+        #close {
+            border-top: 1px solid #9a99ff;
+        }
+
+        #ime li a {
+            color: #00c;
+            padding: 0 5px;
+            display: block;
+            text-decoration: none;
+        }
+
+        #ime li a:hover {
+            background: #d9e1f6;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="outer">
+        <button>输入法</button>
+        <ul id="ime">
+            <li><a href="javascript:;">手写</a></li>
+            <li><a href="javascript:;">拼音</a></li>
+            <li id="close"><a href="javascript:;">关闭</a></li>
+        </ul>
+    </div>
+
+
+
+
+    <script>
+        var oBtn=document.querySelector('button');
+        var oLi=document.querySelector('#ime');
+        var close=document.querySelector('#close');
+
+         oBtn.onmouseover=function(){
+             oLi.style.display='block';
+
+         }
+         oBtn.onmouseout=function(){
+             oLi.style.display='none';
+         }
+         oLi.onmouseover=function(){
+            oLi.style.display='block';
+         }
+         oLi.onmouseout=function(){
+            oLi.style.display='none';
+         }
+         close.onclick=function(){
+             oLi.style.display='none';
+         }
+    
+    
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<style>
+    #outer {
+        width: 330px;
+        height: 100px;
+        margin: 10px auto;
+    }
+
+    #outer div {
+        float: left;
+        width: 100px;
+        height: 100px;
+        margin: 0 5px;
+        background: black;
+    }
+</style>
+
+<body>
+    <center><button>点击将DIV变成红色</button></center>
+    <center><button class="button1">点击将DIV变成蓝色</button></center>
+    <div id="outer">
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+
+<script>
+    var oDiv=document.getElementById('outer').getElementsByTagName('div');
+    var oBtn=document.getElementsByTagName('button')[0];
+    var button1=document.querySelector('.button1');
+
+        oBtn.onclick=function(){
+            for(var i=0;i<oDiv.length;i++) oDiv[i].style.background='red';
+            for(var i=0;i<oDiv.length;i++) oDiv[1].style.background='green';
+        }
+        button1.onclick=function(){
+            for(var i=0;i<oDiv.length;i++) oDiv[i].style.background='blue';
+        }
+        // oBtn.onclick=function(){
+        //     for(var i=0;i<oDiv.length;i++) oDiv[i].style.background='green';
+        // }
+</script>
+
+
+</body>
+
+</html>

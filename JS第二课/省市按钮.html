@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>国家与城市的联动</title>
+</head>
+<body>
+    <select id="countryid" onchange="add1(this.value);"> 
+        <option value="0">--请选择--</option>
+        <option value="中国">中国</option>
+        <option value="美国">美国</option>
+        <option value="德国">德国</option>
+        <option value="日本">日本</option>
+
+    </select>  
+
+    <select id="cityid">
+
+
+     </select>
+    
+
+
+    <script>
+        //创建一个数组来存数据
+        var arr=new Array(4);
+        arr[0]=["中国","南京","梧州","临洮","日噶的","哈密"];
+        arr[1]=["美国","华盛顿","底特律","休斯顿","纽约"];
+        arr[2]=["德国","慕尼黑","柏林","法兰克福","狼堡","哈密"];
+        arr[3]=["日本","北海道","东京","大阪","神户","广岛"];
+        
+
+        function add1(val){
+            // alert('aaa')
+            //1.遍历二维数组， 得到的也是一个数据
+            //2.拿到数组的第一个值和传递过来的值做比较
+            //3.如果相同，获取到第一个值后面的元素
+            //4.得到city的select
+            //5.添加过去（使用appendChild方法）
+                    //---创建option(三步鄹)
+            var city1=document.getElementById("cityid");
+            var options1=city1.getElementsByTagName("option");
+                for(var m=0;m<options1.length;m++){
+                    //得到每一个option
+                    var op=options1[m];
+                    //删除这个option，通过父节点删除city1
+                    city1.removeChild(op);
+                    m--;
+
+                }
+
+            for(var i=0;i<arr.length;i++){
+                var arr1=arr[i];
+                var firstvalue=arr1[0];
+                //判断传过来的值跟第一个值是否相同
+                if(firstvalue==val){//相同
+                    //得到第一个值后面的值
+                    //遍历arr1
+                    for(var j=1;j<arr1.length;j++){
+                        var value1=arr1[j];
+                        // alert(value1);
+                        var option1=document.createElement('option');
+                        var text1=document.createTextNode(value1)
+                        option1.appendChild(text1);
+                        city1.appendChild(option1);
+
+                    }
+                }
+
+            }
+        }
+    
+    
+    
+    </script>
+
+
+</body>
+</html>

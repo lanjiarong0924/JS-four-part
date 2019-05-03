@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    .left{
+        text-align: center;
+        border: 1px dashed blue;
+        width: 854px;
+        margin: 0 auto;
+        height: 100px;
+    }
+    .right{
+        text-align: center;
+        /* position: relative; */
+        /* top: 50%; */
+        /* margin-top: 100px; */
+        width: 854px;
+        margin: 0 auto;
+        height: 100px;
+        border: 1px solid red
+    }
+    .yanse{
+        text-align: center;
+        margin-top: 50px;
+    }
+    </style>
+</head>
+<body>
+    <div class="left">
+    <label for="weather">Select the weather type today: </label>
+<select id="weather">
+  <option value="">--if语句--</option>
+  <option value="sunny">晴空万里</option>
+  <option value="rainy">下雨</option>
+  <option value="snowing">下雪</option>
+  <option value="overcast">阴天</option>
+</select>
+
+<p></p>
+</div>
+<div class="right">
+        <label for="weather">Select the weather type today: </label>
+    <select id="weather" class="select1">
+      <option value="">--switch语句--</option>
+      <option value="sunny">晴空万里</option>
+      <option value="rainy">下雨</option>
+      <option value="snowing">下雪</option>
+      <option value="overcast">阴天</option>
+    </select>
+    
+    <p class="p2"></p>
+    </div>
+
+   
+    <div class="yanse">    
+    <div class="output" style="height: 300px;width: 500px; margin: 0 auto;border: 1px solid black">
+  <label for="theme">Select theme: </label>
+  <select id="theme">
+    <option value="white">White</option>
+    <option value="black">Black</option>
+    <option value="purple">Purple</option>
+    <option value="yellow">Yellow</option>
+    <option value="green">Psychedelic</option>
+  </select>
+
+  <h1>This is my website</h1>
+</div>
+</div>
+</body>
+
+
+<!-- if语句 -->
+<script>
+    var select=document.querySelector('select');
+    var p1=document.querySelector('p');
+
+    select.addEventListener('change',tianqi);
+    function tianqi(){
+        var choice=select.value;
+        if(choice==='sunny'){
+            p1.textContent='It is nice and sunny outside today. Wear shorts! Go to the beach, or the park, and get an ice cream.';
+        }else if(choice==='rainy'){
+            p1.textContent='下雨天了我能送你回家吗，可能外面要下着暴雨了';
+        }else if(choice==='snowing'){
+            p1.textContent='The snow is coming down — it is freezing! Best to stay in with a cup of hot chocolate, or go build a snowman.';
+        }else if(choice==='overcast'){
+            p1.textContent='阴天了我能送你回家吗，可能外面要下雨了'
+        }else{
+            p1.textContent='';
+        }
+
+
+    }
+
+</script>
+<!-- switch语句 -->
+<script>
+    var select1=document.querySelector('.select1');
+    var p2=document.querySelector('.p2');
+
+    select1.addEventListener('change',switch1)
+    function switch1(){
+        var choice = select1.value;
+
+        switch(choice){
+            case'sunny':
+            p2.textContent='It is nice and sunny outside today. Wear shorts! Go to the beach, or the park, and get an ice cream.';
+            break;
+            case 'rainy':
+             p2.textContent = 'Rain is falling outside; take a rain coat and a brolly, and don\'t stay out for too long.';
+              break;
+            case 'snowing':
+            p2.textContent = 'The snow is coming down — it is freezing! Best to stay in with a cup of hot chocolate, or go build a snowman.';
+            break;
+            case 'overcast':
+            p2.textContent = 'It isn\'t raining, but the sky is grey and gloomy; it could turn any minute, so take a rain coat just in case.';
+            break;
+            default:
+            p2.textContent = '';
+             }
+        }
+    
+
+
+</script>
+    
+<!-- 颜色变化 -->
+<script>
+    var select2 = document.querySelector('#theme');
+    var output = document.querySelector('.output');
+
+select2.onchange = function() {
+  var choice = select2.value;
+
+  switch(choice) {
+    case 'black':
+      yanse('black');
+      break;
+    case 'white':
+      yanse('white');
+      break;
+    case 'purple':
+      yanse('purple');
+      break;
+    case 'yellow':
+      yanse('yellow');
+      break;
+    case 'green':
+      yanse('green');
+      break;
+  }
+}
+
+    function yanse(bgColor) {
+    output.style.backgroundColor = bgColor;
+        
+}
+
+</script>
+</html>

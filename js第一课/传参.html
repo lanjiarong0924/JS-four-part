@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>传参</title>
+    <style>
+        body{font:12px/1.5 Tahoma;
+            text-align: center
+        }
+        code,input,button{font-family:inherit;
+        }
+        input{border:1px solid #ccc
+            ;padding:3px;
+        }
+        button{cursor:pointer;
+        }
+
+    </style>
+    
+</head>
+
+<body>
+    <p><input type="text" value="广州市"></p>
+    <p><input type="text" value="天河区"></p>
+    <p><button>传输</button></p>
+
+
+
+
+
+
+
+    <script>
+            var myFn=function(a,b){
+                   alert(a.value);
+                   alert(b.value);
+               }
+
+                   var oInput=document.getElementsByTagName('input');
+                   var oButton=document.getElementsByTagName('button')[0];
+           
+           
+              
+           
+               oButton.onclick = function(){
+                   myFn(oInput[0],oInput[1])
+               } 
+
+               
+               </script>
+</body>
+
+</html>

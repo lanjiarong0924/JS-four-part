@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>点击事件</title>
+    <style>
+          div {
+        background-color: rgb(236, 203, 203);
+        height: 100px;
+        width: 20%;
+        float: left;
+
+       
+      }
+    </style>
+</head>
+
+<body>
+    
+
+
+
+    <script>
+        for(var i=0;i<=14;i++){
+            var div1=document.createElement('div');
+            document.body.appendChild(div1);
+
+        }
+        function random(num){
+            return Math.floor(Math.random()*num);
+        }
+        function bgChange(){
+            var rancol='rgb('+random(255)+','+random(255)+','+random(255)+')';
+            return rancol;
+        }
+        var div2=document.querySelectorAll('div');
+            // target
+            for(var j=0;j<div2.length;j++){
+                div2[j].onclick=function(e){
+                e.target.style.background=bgChange();
+            }
+        }
+        
+    </script>
+</body>
+</html>

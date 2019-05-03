@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0
+        }
+
+        ol,
+        ul {
+            list-style: none
+        }
+
+        .banner {
+            width: 590px;
+            height: 470px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .banner ul {
+            width: 500%;
+            position: absolute;
+            left: 0;
+            top: 0;
+            /* transition: all 1s */
+        }
+
+        .banner ul li {
+            float: left;
+        }
+
+
+
+        .banner>a {
+            display: block;
+            width: 35px;
+            height: 120px;
+            line-height: 120px;
+            color: #fff;
+            text-decoration: none;
+            text-align: center;
+            font-family: "宋体";
+            background: rgba(0, 0, 0, 0.5);
+            font-size: 30px;
+            z-index: 999;
+            position: absolute;
+            top: 50%;
+            margin-top: -60px;
+        }
+
+        .banner>a.prev {
+            left: 0;
+            /* display: none */
+
+        }
+
+        .banner>a.next {
+            right: 0;
+            /* display: none */
+
+        }
+
+        ol {
+            position: absolute;
+            z-index: 999;
+            bottom: 10px;
+            width: 44px;
+            margin: auto;
+            left: 0;
+            right: 0;
+        }
+
+        ol li {
+            float: left;
+            width: 12px;
+            height: 12px;
+            border: 1px solid #fff;
+            background: transparent;
+            font-size: 0;
+            border-radius: 50%;
+            margin: 0 5px;
+            box-sizing: border-box
+        }
+
+        ol li.hover {
+            background: #fff
+        }
+    </style>
+</head>
+
+<body>
+    <div class="banner">
+        <ul>
+            <li><a href="#"><img src="https://m.360buyimg.com/babel/jfs/t1/25917/3/2801/83666/5c21e3e3Eb0b6444d/04269eba1428d419.jpg"
+                        alt=""></a></li>
+            <li><a href="#"><img src="https://m.360buyimg.com/babel/jfs/t1/12208/13/3251/83725/5c25f7ecE32092751/6d19cb220a6099b9.jpg"
+                        alt=""></a></li>
+            <li><a href="#"><img src="https://img11.360buyimg.com/da/jfs/t16663/131/1424030023/110119/f5bc9082/5acb3b19Nc3efd8d0.jpg"
+                        alt=""></a></li>
+            <li><a href="#"><img src="https://img1.360buyimg.com/pop/jfs/t28387/134/489577250/67902/2be758e/5bf4dee6Nde46551d.jpg"
+                        alt=""></a></li>
+        </ul>
+        <ol>
+        </ol>
+        <a href="javascript:;" class="prev">
+            <</a> <a href="javascript:;" class="next">>
+        </a>
+    </div>
+
+    <script>
+
+        //添加ol的点， 复制第一个ul li 
+        var newLi = document.querySelector("ul li").cloneNode(true);
+        var banner = document.querySelector(".banner")
+        var bannerWidth = document.querySelector(".banner").offsetWidth
+
+        console.log(bannerWidth)
+        var ul = document.querySelector("ul")
+        ul.appendChild(newLi)
+
+        var ulLi = document.querySelectorAll("ul li")
+        var ol = document.querySelector("ol")
+        var prev = document.querySelector(".prev")
+        var next = document.querySelector(".next")
+        var timer = null
+
+        for (var i = 0; i < ulLi.length - 1; i++) {
+            var olLi = document.createElement("li")
+            olLi.textContent = i + 1;
+            ol.appendChild(olLi)
+        }
+
+        ol.children[0].classList.add("hover")
+
+        var olLiArr = document.querySelectorAll("ol li")
+
+        ol.style.width = olLiArr.length * 22 + "px"
+
+
+
+
+        olLiArr.forEach(function (el, i) {
+            el.onmouseover = function () {
+                oindex = index = i
+                animate(ul, -index * bannerWidth)
+                hoverfn(oindex)
+
+            }
+        })
+
+
+
+        // 左右按钮
+
+        var index = 0, oindex = 0
+
+        next.onclick = function () {
+            auto()
+        }
+
+
+        prev.onclick = function () {
+
+            index--
+            oindex--
+
+            if (index < 0) {
+                ul.style.left = -bannerWidth * (ulLi.length - 1) + "px";
+                index = ulLi.length - 2
+            }
+            if (oindex < 0) {
+                oindex = olLiArr.length - 1
+            }
+
+            animate(ul, -index * bannerWidth)
+            hoverfn(oindex)
+        }
+
+        console.log(index)
+
+
+        timer = setInterval(function () {
+            auto()
+        }, 2000)
+
+
+        banner.addEventListener("mouseover", function () {
+            clearInterval(timer)
+        })
+        banner.addEventListener("mouseout", function () {
+            timer = setInterval(function () {
+                auto()
+            }, 2000)
+        })
+
+
+        function auto() {
+            index++
+            oindex++
+            if (index > ulLi.length - 1) {
+                ul.style.left = 0;
+                index = 1
+            }
+
+            if (oindex > olLiArr.length - 1) {
+                oindex = 0
+            }
+
+            animate(ul, -index * bannerWidth)
+
+            hoverfn(oindex)
+        }
+
+
+
+
+        function hoverfn(index) {
+            for (var i = 0; i < olLiArr.length; i++) olLiArr[i].classList.remove("hover")
+            olLiArr[index].classList.add("hover")
+        }
+
+
+
+
+
+
+        function animate(ele, target) {
+            var speed = ele.offsetLeft - target > 0 ? -10 : 10
+            clearInterval(ele.timer)
+            ele.timer = setInterval(function () {
+                ele.style.left = speed + ele.offsetLeft + "px"
+                var value = target - ele.offsetLeft
+                if (Math.abs(value) <= Math.abs(speed)) {
+                    ele.style.left = target + "px";
+                    clearInterval(ele.timer)
+                }
+            }, 20)
+        }
+
+
+
+
+
+
+
+
+    </script>
+</body>
+
+</html>

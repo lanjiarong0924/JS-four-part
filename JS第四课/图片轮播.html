@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   <title>Document</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0
+        }
+        body{
+            background: rgb(245, 201, 201);
+        }
+
+        ol,
+        ul {
+            list-style: none
+        }
+
+        .banner {
+            width: 590px;
+            height: 470px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .banner ul li {
+            opacity: 0;
+            position: absolute;
+            left: 0;
+            top: 0;
+            z-index: 0;
+            transition: all 1s
+        }
+
+        .banner li.active {
+            opacity: 1;
+            z-index: 1;
+        }
+        .banner{
+            margin: 0 auto;
+        }
+
+        .banner a {
+            display: block;
+            width: 60px;
+            height: 60px;
+            line-height: 60px;
+            color: #fff;
+            text-decoration: none;
+            text-align: center;
+            font-family: "宋体";
+            background: rgba(115, 169, 230, 0.5);
+            font-size: 30px;
+            z-index: 999;
+            position: absolute;
+            top: 50%;
+            border-radius: 50%;
+            margin-top: -30px;
+        }
+
+        .banner a.prev {
+            left: 0;
+            /* display: none */
+
+        }
+
+        .banner a.next {
+            right: 0;
+            /* display: none */
+
+        }
+
+        ol {
+            position: absolute;
+            z-index: 999;
+            bottom: 10px;
+            width: 44px;
+            margin: auto;
+            left: 0;
+            right: 0;
+        }
+
+        ol li {
+            float: left;
+            width: 12px;
+            height: 12px;
+            border: 1px solid #fff;
+            background: transparent;
+            font-size: 0;
+            border-radius: 50%;
+            margin: 0 5px;
+            box-sizing: border-box
+        }
+
+        ol li.hover {
+            background: rgb(243, 167, 167)
+        }
+    </style>
+</head>
+
+<body>
+    <div class="banner">
+        <ul>
+            <li class="active"><a href="#"><img src="https://m.360buyimg.com/babel/jfs/t1/16367/29/3140/101322/5c24953eE3615e42b/d9f949ed9d1af604.jpg"
+                        alt=""></a></li>
+            <li><a href="#"><img src="https://img1.360buyimg.com/pop/jfs/t1/19967/14/3531/102982/5c276d46Ee0ca98b7/54e17a557e29ff01.jpg"
+                        alt=""></a></li>
+            <li><a href="#"><img src="https://img11.360buyimg.com/da/jfs/t16663/131/1424030023/110119/f5bc9082/5acb3b19Nc3efd8d0.jpg"
+                        alt=""></a></li>
+            <li><a href="#"><img src="https://img1.360buyimg.com/pop/jfs/t1/23986/19/3155/82711/5c2491a4E6d9e197c/f0142ea62a87c479.jpg"
+                        alt=""></a></li>
+           <li class="active"><a href="#"><img src="https://m.360buyimg.com/babel/jfs/t1/25433/8/2661/92197/5c20a29dE57b79c3e/12fdcaec69f7361c.jpg"
+                     alt=""></a></li>
+           <li class="active"><a href="#"><img src="https://m.360buyimg.com/babel/jfs/t1/24121/25/3274/94802/5c25fbddE30960487/310224141ef77d8f.jpg"
+                      alt=""></a></li>
+           <li class="active"><a href="#"><img src="https://img1.360buyimg.com/pop/jfs/t1/23986/19/3155/82711/5c2491a4E6d9e197c/f0142ea62a87c479.jpg"
+                      alt=""></a></li>
+
+        </ul>
+        <ol>
+        </ol>
+        <a href="javascript:;" class="prev">
+            <</a> <a href="javascript:;" class="next">>
+        </a>
+    </div>
+</body>
+    <script>
+       
+
+            //1. ol 添加元素
+
+            var ulLi = document.querySelectorAll("ul li");
+            var ol = document.querySelector("ol")
+            var banner = document.querySelector(".banner")
+            // var btns = document.querySelectorAll(".banner>a")
+            var prev = document.querySelector('.prev')
+            var next = document.querySelector('.next')
+            var timer = null
+            var aIndex = 0
+            for (var i = 0; i < ulLi.length; i++) {
+                var olLi = document.createElement("li");
+                olLi.textContent = i;
+                ol.appendChild(olLi)
+            }
+            ol.style.width = 22 * ulLi.length + "px"
+            var olLis = document.querySelectorAll("ol li");
+            olLis[0].classList.add("hover")
+
+
+
+
+            // 2. 触摸控制点
+
+            olLis.forEach(function (el, index) {
+                console.log(el, index)
+                el.addEventListener("mouseover", function () {
+                    fn(index)
+                })
+            })
+
+            function fn(index) {
+                // aIndex = index
+                for (var i = 0; i < ulLi.length; i++) {
+                    ulLi[i].classList.remove("active")
+                    olLis[i].classList.remove("hover")
+                }
+                ulLi[index].classList.add("active")
+                olLis[index].classList.add("hover")
+            }
+
+              //3.点击左右
+
+            next.addEventListener("click", function () {
+                fn2("next")
+            })
+
+            prev.addEventListener("click", function () {
+                fn3("prev")
+            })
+            
+            function fn2(){
+                aIndex++;
+                if(aIndex>ulLi.length-1){
+                    aIndex=0;
+                }
+                fn(aIndex);
+            }
+            function fn3(){
+                aIndex--;
+                if(aIndex<0){
+                    aIndex=ulLi.length-1;
+                }
+                fn(aIndex);
+            }
+
+            //封装成一个
+            // function fn2(flag) {
+
+            //     if (flag == "next") {
+            //         aIndex++;
+            //     } else {
+            //         aIndex--;
+            //     }
+            //     if (aIndex > ulLi.length - 1) {
+            //         aIndex = 0
+            //     }
+
+
+            //     if (aIndex < 0) {
+            //         aIndex = ulLi.length - 1
+            //     }
+            //     fn(aIndex)
+            // }
+
+                //自动播放函数  
+         timer=setInterval(function(){
+             fn2('next');
+             },1500)
+
+        banner.addEventListener('mouseover',function(){
+            clearInterval(timer)
+        })
+        banner.addEventListener('mouseout',function(){
+             timer=setInterval(function(){
+             fn2('next');
+             },1500)
+        })
+
+</script>
+</html>

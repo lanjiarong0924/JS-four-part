@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .msgBox {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 242px;
+            border-radius: 10px;
+            background-color: #eee;
+            background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.1));
+        }
+
+        .msgBox p {
+            line-height: 1.5;
+            padding: 10px 20px;
+            color: #333;
+            padding-left: 82px;
+            background-position: 25px center;
+            background-repeat: no-repeat;
+        }
+       
+            .button1 {
+    margin: 223px 640px;
+    width: 152px;
+    height: 50px;
+
+}
+        
+        .msgBox button {
+            background: none;
+            border: none;
+            position: absolute;
+            top: 0;
+            right: 0;
+            font-size: 1.1rem;
+            color: #aaa;
+        }
+    </style>
+</head>
+
+<body>
+    <button class="button1">Display message box</button>
+
+
+
+
+    <script>
+            var btn = document.querySelector('button');
+
+
+var a = 0;
+btn.onclick = function () {
+    a++;
+    if(a == 1){
+        textNeirong('Brian: Hi there, how are you today?', 'warning');
+    }else{
+        textNeirong('Brian: Hi there, how are you today?', 'chat');
+        a=0;
+    }
+    btn.style.display='none'
+    
+};
+function textNeirong(msgText, msgType){
+    var html=document.querySelector('html');
+    var div1=document.createElement('div');
+    div1.setAttribute('class', 'msgBox');
+    // console.log(div1)
+
+    html.appendChild(div1);
+    var msg=document.createElement('p');
+    msg.textContent=msgText;
+    div1.appendChild(msg);
+
+    var closeBtn=document.createElement('button');
+    closeBtn.textContent='X'
+    div1.appendChild(closeBtn);
+
+    closeBtn.onclick=function(){
+        div1.parentNode.removeChild(div1);
+        btn.style.display='block'
+    }
+
+    if(msgType==='warning'){
+        msg.style.backgroundImage='url(././img/warning.png)';
+        div1.style.backgroundColor='red';
+    }else if(msgType==='chat'){
+        msg.style.backgroundImage='url(././img/chat.png)';
+        div1.style.backgroundColor='green';
+    }
+
+
+
+}
+
+
+    
+
+
+    </script>
+</body>
+</html>

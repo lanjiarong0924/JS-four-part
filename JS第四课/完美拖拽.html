@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>拖拽</title>
+    <style type="text/css">
+        html,
+        body {
+            overflow: hidden;
+        }
+
+        body,
+        div,
+        h2,
+        p {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            color: #fff;
+            background: rgb(248, 186, 186);
+        }
+
+        p {
+            padding: 0 10px;
+            margin-top: 10px;
+        }
+
+        span {
+            color: #ff0;
+            padding-left: 5px;
+        }
+
+        #box {
+            position: absolute;
+            width: 300px;
+            height: 150px;
+            background: #333;
+            border: 2px solid #ccc;
+            top: 50%;
+            left: 50%;
+            margin: -75px 0 0 -150px;
+        }
+
+        #box h2 {
+            height: 25px;
+            cursor: move;
+            background: rgb(141, 100, 100);
+            border-bottom: 2px solid #ccc;
+            text-align: right;
+            padding: 0 10px;
+        }
+
+        #box h2 a {
+            color: #fff;
+            font: 12px/25px Arial;
+            text-decoration: none;
+            outline: none;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div id="box">
+        <h2><a href="javascript:;">点击回放拖动轨迹</a></h2>
+        <p><strong>Drag true or false:</strong><span></span></p>
+        <p><strong>offsetTop上边距离:</strong><span></span></p>
+        <p><strong>offsetLeft左边距离:</strong><span></span></p>
+    </div>
+</body>
+<script>
+    var oBox=document.getElementById('box');
+    var oH2=oBox.getElementsByTagName('h2')[0];
+    var oA=oBox.getElementsByTagName('a')[0];
+    var ospan=oBox.getElementsByTagName('span');
+    var diX = diY = 0;
+    var oDrag=false;
+
+    var aPos=[{x:oBox.offsetLeft,y:oBox.offsetTop}]
+
+    oBox.onmousedown=function(e){
+        oDrag=true;
+        // console.log(e.clientX)
+        // console.log(oBox.offsetLeft)
+        diX=e.clientX-oBox.offsetLeft;
+        diY=e.clientY-oBox.offsetTop;
+        console.log(diX,diY)
+        //数组中添加新元素 push
+        aPos.push({x:oBox.offsetLeft, y:oBox.offsetTop})
+        //捕获释放 事件
+        this.setCapture && this.setCapture();
+        return false
+    }
+//SetCapture()和ReleaseCapture()必须成对呈现。
+    oBox.onmousemove=function(e){
+        var L1=e.clientX-diX;
+        var T1=e.clientY-diY;
+
+        var maxL=document.documentElement.clientWidth-oBox.offsetWidth;
+        var maxT=document.documentElement.clientHeight-oBox.offsetHeight;
+
+        oBox.style.marginTop=oBox.style.marginLeft=0;
+
+        L1=L1<0?0:L1;
+        L1=L1>maxL?maxL:L1;
+
+        T1=T1<0?0:T1;
+        T1=T1>maxT?maxT:T1;
+
+        oBox.style.top=T1+'px'
+        oBox.style.left=L1+'px'
+        
+        aPos.push({x:L1,y:T1})
+        
+        jianting();
+    }
+
+//鼠标释放, 结束拖拽  onlosecapture当元素失去鼠标移动所形成的选择焦点时触发此事件
+//SetCapture()和ReleaseCapture()必须成对呈现。
+document.onmouseup = window.onblur = oH2.onlosecapture = function ()
+	{
+		oDrag = false;				
+		oH2.releaseCapture && oH2.releaseCapture();
+		jianting()
+	};
+// //阻止冒泡事件
+//     oA.onmousedown = function (e)
+// 	{
+// 		(e || window.e).cancelBubble = true
+// 	};
+
+
+
+        //监听状态函数
+
+        function jianting(){
+            ospan[0].innerHTML=oDrag;
+            ospan[1].innerHTML=oBox.offsetTop;
+            ospan[2].innerHTML=oBox.offsetLeft
+        }
+        
+        jianting();
+
+     
+</script>
+    
+</html>
